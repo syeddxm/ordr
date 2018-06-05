@@ -8,7 +8,6 @@ import {
 } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
-import { HomePage } from '../home/home';
 
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -76,7 +75,7 @@ export class LoginPage {
     this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then((result) => {
         
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push('QrPage');
       }
     );
 
@@ -90,8 +89,10 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log("View Load");
 
+    console.log(this.afAuth.authState);
+
     if (this.afAuth.auth.currentUser) {
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot('QrPage');
     }
   }
 

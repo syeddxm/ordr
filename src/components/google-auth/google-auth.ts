@@ -24,7 +24,6 @@ export class GoogleAuthComponent {
   user: Observable<firebase.User>;
 
   constructor(private authF: AuthProvider, 
-              private gplus: GooglePlus,
               private fireAuth: AngularFireAuth,
               private navCtrl: NavController  
             ) {
@@ -34,7 +33,7 @@ export class GoogleAuthComponent {
   }
 
 
-  googleLogin() {
+  async googleLogin() {
 
     this.authF.loginUserWithGoogle()
       .then( (result)=>{

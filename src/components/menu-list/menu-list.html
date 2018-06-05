@@ -1,0 +1,9 @@
+<!-- Generated template for the MenuListComponent component -->
+
+<ion-toolbar no-border-top>
+  <ion-searchbar placeholder="Search Menu" (ionInput)="filterItems($event)"></ion-searchbar>
+</ion-toolbar>
+
+<ion-list>
+  <menu-item *ngFor="let item of foodItems" name="{{item.name}}" image="{{item.image}}" description="{{item.description}}"></menu-item>
+</ion-list>

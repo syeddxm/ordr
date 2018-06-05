@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { NavController } from 'ionic-angular';
 /**
  * Generated class for the QrscannerComponent component.
  *
@@ -15,32 +15,21 @@ export class QrscannerComponent {
 
   text: string;
 
-  constructor(private qrScanner: QRScanner) {}
+  options: BarcodeScannerOptions;
+
+  constructor(public navCtrl: NavController, private qrScanner: BarcodeScanner) {}
 
 
   QRscan(){
-    this.qrScanner.prepare()
-    .then((status: QRScannerStatus) => {
-      if (status.authorized) {
-        // camera permission was granted
 
-
-        // start scanning
-        let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-          console.log('Scanned something', text);
-
-          this.qrScanner.hide(); // hide camera preview
-          scanSub.unsubscribe(); // stop scanning
-        });
-
-      } else if (status.denied) {
-        // camera permission was permanently denied
-        // you must use QRScanner.openSettings() method to guide the user to the settings page
-        // then they can grant the permission from there
-      } else {
-        // permission was denied, but not permanently. You can ask for permission again at a later time.
-      }
-    })
-    .catch((e: any) => console.log('Error is', e));
-  }
+    this.options = {
+      showTorchButton: true,
+      prompt: 'Scan the QR code on the table to join the meal'
+    }
+    this.qrScanner.scan(this.options).then(barcodeData => {
+      this.navCtrl.push('MainPage')
+     }).catch(err => {
+         console.log('Error', err);
+     });
+    }
 }

@@ -5,18 +5,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth'; // We'll install this in the next section
+import { MenuItemPopupComponent } from '../components/menu-item-popup/menu-item-popup';
+import { ComponentsModule } from '../components/components.module';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyC4iuCHxkFSgKu8HHZtaQz84ZRgv8ZvOqM',
@@ -38,12 +40,14 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig), // <-- firebase here
     AngularFireAuthModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    MenuItemPopupComponent
   ],
   providers: [
     StatusBar,
@@ -51,7 +55,7 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    QRScanner
+    BarcodeScanner
   ]
 })
 export class AppModule {}

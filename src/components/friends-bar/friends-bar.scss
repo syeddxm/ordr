@@ -1,0 +1,44 @@
+friends-bar {
+
+    .youre-with {
+        text-align: center;
+    }
+
+    .item-md.item-block .item-inner {
+        padding-right: 0px;
+        border-bottom: none;
+    }
+
+    .friends-items {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    ion-scroll {
+        overflow: scroll;
+        white-space: nowrap;
+        height: 4em;
+    }
+
+    .friend {
+        margin: 5px 20px;
+        display: inline-block;
+    }
+
+    .friend .avatar-img img {
+        
+        border-radius: 50%;
+        overflow: hidden;
+        width: 40px;
+        height: 40px;
+    }
+
+    .friend .avatar-img {
+        display: flex;
+        justify-content: center;
+    }
+
+    .friend .friend-name {
+        text-align: center;
+    }
+}

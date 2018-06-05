@@ -1,0 +1,16 @@
+<!-- Generated template for the FriendsBarComponent component -->
+<ion-toolbar>
+  <h6 class="youre-with">You're With</h6>
+  <ion-scroll scrollX>
+    <div class="friend" *ngFor="let person of people">
+      <div class="avatar-img"> 
+        <img src="{{person.picture.thumbnail}}"/>
+      </div>
+      <!--
+      <p class="friend-name">
+        {{person.name.first}}
+      </p>
+    -->
+    </div>
+  </ion-scroll>
+</ion-toolbar>
