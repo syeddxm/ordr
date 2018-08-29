@@ -8,12 +8,12 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth'; // We'll install this in the next section
@@ -38,6 +38,7 @@ const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig), // <-- firebase here
+    AngularFirestoreModule,
     AngularFireAuthModule,
     HttpModule,
     HttpClientModule,

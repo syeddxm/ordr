@@ -13,8 +13,6 @@ import { NavController } from 'ionic-angular';
 })
 export class QrscannerComponent {
 
-  text: string;
-
   options: BarcodeScannerOptions;
 
   constructor(public navCtrl: NavController, private qrScanner: BarcodeScanner) {}

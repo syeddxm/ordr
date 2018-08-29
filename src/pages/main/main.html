@@ -14,7 +14,10 @@
 </ion-header>
 
 <ion-content>
-  <menu-list></menu-list>
+  <ion-searchbar placeholder="Search Menu" (ionInput)="filterItems($event)"></ion-searchbar>
+  <ion-list>
+    <menu-item *ngFor="let item of menu" name="{{item.name}}" image="{{item.imageURL}}" description="{{item.description}}" price="{{item.price}}" halal="{{item.halal}}" vegan="{{item.vegan}}" gluten="{{item.gluten}}"></menu-item>
+  </ion-list>
 
 </ion-content>
 

@@ -1,7 +1,11 @@
 <!-- Generated template for the MenuItemPopupComponent component -->
 <ion-card-content>
   {{description}}
-  <p style="color:green">
-    <ion-icon name="leaf"></ion-icon>
+  {{price}}
+  <p>
+    <ion-icon *ngIf="vegan == 'true'" style="color:green" name="leaf"></ion-icon>
+    <ion-icon *ngIf="halal == 'true'" style="color:yellow" name="moon"></ion-icon>
+    <ion-icon *ngIf="gluten == 'true'" style="color:wheat" name="logo-google"></ion-icon>
   </p>
+
 </ion-card-content>

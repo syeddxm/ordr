@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the QrPage page.
@@ -15,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class QrPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authF: AuthProvider) {
   }
 
   ionViewDidLoad() {
@@ -24,6 +25,13 @@ export class QrPage {
 
   goToMenu(){
     this.navCtrl.setRoot('MainPage');
+  }
+
+  signOut() {
+    this.authF.signOut()
+    .then((result) => {
+      this.navCtrl.setRoot('LoginPage');
+    });
   }
 
 }

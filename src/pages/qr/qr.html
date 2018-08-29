@@ -8,14 +8,13 @@
 
   <ion-navbar>
     <ion-title>qr</ion-title>
+    <ion-buttons end><button ion-button  (click)="signOut()">Sign Out</button></ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
   <qrscanner></qrscanner>
 
   <button ion-button (tap)="goToMenu()">Menu</button>
-
 </ion-content>

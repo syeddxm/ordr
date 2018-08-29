@@ -1,8 +1,25 @@
 page-login {
+    #ordrLogo {
+        padding: 10%;
+    }
 
+    h1{
+        color: white;
+        padding: 5%;
+        margin: auto;
+        text-align: center;
+        font-size: 4em;
+    }
+    
+    .signInToggle {
+        text-align: center;
+        padding: 1%;
+    }
+
+    ion-content {
+        background: lightcoral !important;
+    }
 }
 
 
-#ordrLogo {
-    padding: 10%;
-}
+

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
 /**
@@ -14,9 +14,19 @@ import { NavParams } from 'ionic-angular';
 export class MenuItemPopupComponent {
 
   description: string;
+  price: number;
+  halal: boolean;
+  gluten: boolean;
+  vegan: boolean;
 
   constructor(public navP: NavParams) {
     this.description = this.navP.get('description');
+    this.price = this.navP.get('price');
+    this.gluten = this.navP.get('gluten');
+    this.halal = this.navP.get('halal');
+    this.vegan = this.navP.get('vegan');
+
+    console.log(this.price + " "  + this.vegan);
   }
 
 }

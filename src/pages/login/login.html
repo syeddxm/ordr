@@ -6,27 +6,20 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
+  
 
 </ion-header>
 
 
 <ion-content padding  [fullscreen]>
-  <img src={{ordr_logo}} id="ordrLogo">
-  <google-auth></google-auth>
+  <h1>ordr</h1>
 
-
-
-  
-
-  <ion-card padding>
+  <ion-card padding *ngIf="loginToggle == true">
     <form [formGroup]="loginForm" (submit)="loginUser()" novalidate >
   
       <ion-item>
         <ion-label stacked>Email</ion-label>
-        <ion-input formControlName="email" type="email" placeholder="Your email address"></ion-input>
+        <ion-input [(ngModel)]="email" formControlName="email" type="email" placeholder="Your email address"></ion-input>
       </ion-item>
   
       <ion-item>
@@ -34,19 +27,24 @@
         <ion-input formControlName="password" type="password" placeholder="Your password"></ion-input>
       </ion-item>
   
-      <button ion-button block type="submit">
-        Login
+      <button [disabled]="!loginForm.valid" ion-button block type="submit">
+        Sign In
       </button>
+
+      <div class="signInToggle">
+        <p>Don't have an account?</p>
+        <a (click)="signInToggle()">Sign Up</a>
+      </div>
     
     </form>
     
   </ion-card>
-  <ion-card padding>
+  <ion-card padding *ngIf="loginToggle != true">
       <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
     
         <ion-item>
           <ion-label stacked>Email</ion-label>
-          <ion-input formControlName="email" type="email" placeholder="Your email address">
+          <ion-input [(ngModel)]="email" formControlName="email" type="email" placeholder="Your email address">
           </ion-input>
         </ion-item>
     
@@ -55,12 +53,39 @@
           <ion-input formControlName="password" type="password" placeholder="Your password">
           </ion-input>
         </ion-item>
+
+        <ion-item class='form-text error' *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].hasError('minlength')">
+          <ion-label no-margin stacked>Passwords must be at least 6 characters</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Confirm Password</ion-label>
+          <ion-input formControlName="confirmPassword" type="password" placeholder="Re-type password" show-password></ion-input>
+        </ion-item>
+
+        <ion-item class='form-text error' *ngIf="signupForm.controls['password'].touched  && signupForm.hasError('mismatchedPasswords') && signupForm.controls['password']valid">
+          <ion-label no-margin stacked>Passwords do not match</ion-label>
+        </ion-item>
+        
     
-        <button ion-button block type="submit">
+        <button [disabled]="!signupForm.valid" ion-button block type="submit">
           Create an Account
         </button>
+
+        <div class="signInToggle">
+          <p>Don't have an account?</p>
+          <a (click)="signInToggle()">Sign In</a>
+        </div>
       </form>
     </ion-card>
+
+    <google-auth></google-auth>
+
+
+<div>
+       {{ loggedIn }}
+
+</div>
 
 
 

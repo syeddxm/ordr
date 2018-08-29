@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 
-import { QrPage } from '../qr/qr';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import * as firebase from 'firebase/app';
-import { GooglePlus } from '@ionic-native/google-plus';
 import { NavController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -25,7 +24,7 @@ export class GoogleAuthComponent {
 
   constructor(private authF: AuthProvider, 
               private fireAuth: AngularFireAuth,
-              private navCtrl: NavController  
+              private navCtrl: NavController
             ) {
 
       this.user = this.fireAuth.authState;
@@ -35,15 +34,11 @@ export class GoogleAuthComponent {
 
   async googleLogin() {
 
-    this.authF.loginUserWithGoogle()
-      .then( (result)=>{
-        this.navCtrl.setRoot('QrPage');
-      }
-      );
+    await this.authF.loginUserWithGoogle()
+    .then((result)=>{
+      this.navCtrl.setRoot('QrPage');
+    });
   }
 
-  signOut() {
-    this.authF.signOut();
-  }
 
 }

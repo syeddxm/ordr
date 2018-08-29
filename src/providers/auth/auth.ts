@@ -4,10 +4,9 @@ import { Observable } from 'rxjs/Observable';
 
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
 
-import {QrPage} from '../../pages/qr/qr';
 /*
   Generated class for the AuthProvider provider.
 
@@ -26,6 +25,7 @@ export class AuthProvider {
     private afAuth: AngularFireAuth, 
     private gplus: GooglePlus,
     private platform: Platform,
+    private alertCtrl: AlertController,
   ) {
       
       this.user = this.afAuth.authState;
@@ -33,21 +33,24 @@ export class AuthProvider {
   }
 
   loginUser(email: string, password: string): Promise<any> {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return (
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      
+    );
   }
 
   async loginUserWithGoogle() : Promise<void>{
     if (this.platform.is('cordova')) {
-      this.nativeGoogleLogin();
+      return this.nativeGoogleLogin();
     } else {
-      this.webGoogleLogin();
+      return this.webGoogleLogin();
     }
   }
 
   async webGoogleLogin(): Promise<void> {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider);
+      await this.afAuth.auth.signInWithPopup(provider);
     } catch(err) {
       console.log(err)
     }
@@ -82,17 +85,26 @@ export class AuthProvider {
         .ref('/userProfile')
         .child(newUser.uid)
         .set({ email: email });
-      });
+      }, error => {
+        let alert = this.alertCtrl.create({
+          title: 'Sign Up Error',
+          message: error + ' Please try again',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    );
   }
 
-  signOut() {
-    this.afAuth.auth.signOut();
+  signOut() : Promise<any>{
+    
     if (this.platform.is('cordova')) {
-      this.gplus.logout();
+      console.log('cordova');
+      return this.gplus.logout()
+
+    } else {
+      return this.afAuth.auth.signOut()
     }
-
-    //this.navCtrl.push(QrPage);
-
 
   }
 
